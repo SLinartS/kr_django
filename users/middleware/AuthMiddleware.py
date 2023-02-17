@@ -15,13 +15,20 @@ class AuthMiddleware:
         session_id = request.COOKIES.get('session_id')
 
         if (user_login and session_id):
-            user = User.objects.get(
-                login=user_login, session_id=session_id)
-            if (user):
+            try:
+                user = User.objects.get(
+                    login=user_login, session_id=session_id)
+                if (user):
+                    response = self.get_response(request)
+                    return response
+                if (request.path != '/register'):
+                    return redirect('/register')
+
+            except:
+                if (request.path != '/register'):
+                    return redirect('/register')
                 response = self.get_response(request)
                 return response
-        if (request.path != '/register'):
-            return redirect('/register')
 
         response = self.get_response(request)
         return response

@@ -1,6 +1,5 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from users.services.user import get_all
 from users.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 import random
@@ -56,4 +55,6 @@ class Index(View):
     template_name = 'index.html'
 
     def get(self, request):
-        return render(request, self.template_name, context={'users': get_all()})
+        users = User.objects.all()
+        if (users):
+            return render(request, self.template_name, context={'users': users})
