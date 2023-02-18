@@ -1,9 +1,12 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from users.models import User
+from users.models import User, Role
 from utils.utils import generate_session_id
+from users.actions.user import get_auth_user
+from mysqll.config import ERROR_PAGE_URL
+from mysqll.constants import ROLE_TEACHER_ID, ROLE_STUDENT_ID
 
-TOKEN_LIFE_TIME = 60
+TOKEN_LIFE_TIME = 60 * 60
 
 
 class Register(View):
@@ -22,9 +25,9 @@ class Register(View):
         if (login and password and name and surname and patronymic):
             session_id = generate_session_id()
             new_user = User.objects.create(
-                login=login, password=password, name=name, surname=surname, patronymic=patronymic, session_id=session_id, role=1)
+                login=login, password=password, name=name, surname=surname, patronymic=patronymic, session_id=session_id, role=Role.objects.get(id=ROLE_TEACHER_ID))
             if (new_user):
-                response = redirect('/')
+                response = redirect('/groups')
                 response.set_cookie('user_login', login, TOKEN_LIFE_TIME)
                 response.set_cookie('session_id', session_id, TOKEN_LIFE_TIME)
                 return response
@@ -46,11 +49,24 @@ class Login(View):
             if (user):
                 session_id = generate_session_id()
                 user.update(session_id=session_id)
-                response = redirect('/')
+                response = redirect('/groups')
                 response.set_cookie('user_login', login, TOKEN_LIFE_TIME)
                 response.set_cookie('session_id', session_id, TOKEN_LIFE_TIME)
                 return response
         return render(request, self.template_name, context={'errors': 'Неверный логин или пароль'})
+
+
+class Logout(View):
+    template_name = 'users'
+
+    def get(self, request):
+        try:
+            user = get_auth_user(request)
+            if (user):
+                user.update(session_id=None)
+                return redirect('/groups')
+        except ValueError:
+            return render(request, ERROR_PAGE_URL, contenx={'error': 'Ошибка выхода из аккаунта'})
 
 
 class Delete(View):
@@ -59,12 +75,4 @@ class Delete(View):
     def post(self, request, login):
         if (login):
             User.objects.filter(login=login).delete()
-        return redirect('/')
-
-
-class Index(View):
-    template_name = 'index.html'
-
-    def get(self, request):
-        users = User.objects.all()
-        return render(request, self.template_name, context={'users': users})
+        return redirect('/groups')

@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} 
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'djangoapp/css/groups.css' %} ">
+{% endblock link %}
+
+{% block content %}
+<main class="main">
+	<div class="teachers">
+    <h3 class="main__title">Группы</h3>
+    <div class="teachers__list list">
+      {% if groups %} {% for group in groups %}
+      <a class="list__item" href="{% url 'groups' %}?group={{group.id}}">{{ group.title }}</a>
+      {% endfor %} {% else %}
+      <p>Нет групп и всё тут</p>
+      {% endif %}
+    </div>
+	</div>
+
+	<div class="info">
+    <h3 class="main__title">Текущий пользователь</h3>
+    <div class="info__list list">
+      {% if auth_user %}
+      <p class="list__item">{{ auth_user.name }} {{ auth_user.surname }}</p>
+      {% else %}
+      <p>Нет информации всё тут</p>
+      {% endif %}
+    </div>
+	</div>
+
+  <div class="works">
+    <h3 class="main__title">Загруженные работы</h3>
+    <div class="works__list list">
+      {% if files %} 
+        {% for file in files %}
+          <div class="list__item">
+            <p class="list__text">{{ file.title }}</p>
+            <a href="{% url 'download' file.url %}" download="{{ file.title }}">
+              <button type="button">Скачать</button>
+            </a>
+          </div>
+        {% endfor %} {% else %}
+          <p>Нет работ и всё тут</p>
+      {% endif %}
+    </div>
+	</div>
+  <a href="{% url 'materials' %}">Материалы</a>
+</main>
+
+{% endblock content %}

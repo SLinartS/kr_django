@@ -1,0 +1,66 @@
+{% extends 'layout.html' %} 
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'djangoapp/css/works.css' %} ">
+{% endblock link %}
+
+
+
+{% block content %}
+<main class="main">
+	<div class="teachers">
+    <h3 class="main__title">Преподаватели</h3>
+    <div class="teachers__list list">
+      {% if users %} 
+        {% for user in users %}
+          <a class="list__item" href="{% url 'works' %}?teacher={{user.id}}">{{ user.name }}{{ user.patronymic }}</a>
+        {% endfor %} 
+      {% else %}
+          <p>Нет групп и всё тут</p>
+      {% endif %}
+    </div>
+	</div>
+
+	<div class="materials">
+    <h3 class="main__title">Методические материалы</h3>
+    <div class="materials__list list">
+      {% if files %} {% for file in files %}
+      <div class="list__item">
+        <p class="list__text">{{ file.title }}</p>
+          <a href="{% url 'download' file.url %}" download="{{ file.title }}">
+            <button type="button">Скачать</button>
+          </a>
+          <form action="{% url 'delete' file.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Удалить</button>
+          </form>
+      </div>
+      {% endfor %} {% else %}
+      <p>Нет файлов и всё тут</p>
+      {% endif %}
+    </div>
+	</div>
+
+	<div class="info">
+    <h3 class="main__title">Текущий пользователь</h3>
+    <div class="info__list list">
+      {% if auth_user %}
+      <p class="list__item">{{ auth_user.name }} {{ auth_user.surname }}</p>
+      {% else %}
+      <p>Нет информации всё тут</p>
+      {% endif %}
+    </div>
+	</div>
+
+	<div class="load">
+    <form action="{% url 'upload-work' teacher_id %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input class="load__input" type="file" name="work" required>
+      <button class="load__button" type="submit" disabled>Загрузить работу</button>
+    </form>
+  </div>
+  <script src="{% static 'djangoapp/js/index.js' %}"></script>
+</main>
+
+{% endblock content %}

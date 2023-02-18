@@ -1,0 +1,8 @@
+- model: djangoapp.filetype
+  pk: 1
+  fields:
+    type: material
+- model: djangoapp.filetype
+  pk: 2
+  fields:
+    type: work

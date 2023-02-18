@@ -1,0 +1,10 @@
+- model: users.role
+  pk: 1
+  fields:
+      title: teacher
+      alias: Преподаватель
+- model: users.role
+  pk: 2
+  fields:
+      title: student
+      alias: Студенгт

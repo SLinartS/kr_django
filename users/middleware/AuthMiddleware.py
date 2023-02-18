@@ -14,24 +14,23 @@ class AuthMiddleware:
         user_login = request.COOKIES.get('user_login')
         session_id = request.COOKIES.get('session_id')
 
+        if (request.path == '/login' or request.path == '/register'):
+            return self.get_response(request)
+
         if (user_login and session_id):
             try:
                 user = User.objects.get(
                     login=user_login, session_id=session_id)
                 if (user):
-                    response = self.get_response(request)
-                    return response
-                if (request.path != '/login'):
-                    return redirect('/login')
-
+                    return self.get_response(request)
             except:
                 if (request.path != '/login'):
                     return redirect('/login')
                 response = self.get_response(request)
                 return response
 
-        response = self.get_response(request)
-        return response
-
+        if (request.path != '/login'):
+            return redirect('/login')
+        return self.get_response(request)
         # Code to be executed for each request/response after
         # the view is called.

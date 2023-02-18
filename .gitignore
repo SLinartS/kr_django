@@ -2,7 +2,7 @@
 *.log
 *.pot
 *.pyc
-pycache
+__pycache__
 db.sqlite3
 media
 
@@ -25,3 +25,8 @@ venv.bak/
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Other # 
+/files
+*/migrations/*.py
+!*/migrations/__init__.py

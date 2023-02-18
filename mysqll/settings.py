@@ -24,8 +24,10 @@ SECRET_KEY = 'django-insecure-e91g4s34yo91og^tr01(*#-2z#s(m&r=jz_+7$ns(v#_q%e75+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
+# MEDIA_ROOT = BASE_DIR / 'files'
+# MEDIA_URL = 'files/'
 
 # Application definition
 
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'dbconnection',
+    'djangoapp',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )

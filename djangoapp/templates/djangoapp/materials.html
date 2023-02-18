@@ -1,0 +1,47 @@
+{% extends 'layout.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'djangoapp/css/style.css' %} " />
+{% endblock link %} {% block content %}
+<main class="main">
+	<div class="materials">
+		<h3 class="main__title">Методические материалы</h3>
+		<div class="materials__list list">
+			{% if files %} {% for file in files %}
+			<div class="list__item">
+				<p class="list__text">{{ file.title }}</p>
+				<a href="{% url 'download' file.url %}" download="{{ file.title }}">
+					<button type="button">Скачать</button>
+				</a>
+				<form action="{% url 'delete' file.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit">Удалить</button>
+				</form>
+			</div>
+			{% endfor %} {% else %}
+			<p>Нет файлов и всё тут</p>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="info">
+		<h3 class="main__title">Текущий пользователь</h3>
+		<div class="info__list list">
+			{% if auth_user %}
+			<p class="list__item">{{ auth_user.name }} {{ auth_user.surname }}</p>
+			{% else %}
+			<p>Нет информации всё тут</p>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="load">
+		<form action="{% url 'upload-material' %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input class="load__input" type="file" name="material" required />
+			<button class="load__button" type="submit" disabled>Загрузить работу</button>
+		</form>
+	</div>
+  <a href="{% url 'groups' %}">Группы</a>
+	<script src="{% static 'djangoapp/js/index.js' %}"></script>
+</main>
+
+{% endblock content %}

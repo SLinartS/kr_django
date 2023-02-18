@@ -1,0 +1,19 @@
+- model: djangoapp.group
+  pk: 1
+  fields:
+      title: GroupTitle1
+      users:
+          - 1
+          - 2
+          - 5
+          - 6
+
+- model: djangoapp.group
+  pk: 2
+  fields:
+      title: GroupTitle2
+      users:
+          - 2
+          - 4
+          - 7
+          - 8
