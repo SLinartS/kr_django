@@ -1,9 +1,9 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from users.models import User
-from django.http import HttpResponseRedirect, HttpResponse
-import random
-import string
+from utils.utils import generate_session_id
+
+TOKEN_LIFE_TIME = 60
 
 
 class Register(View):
@@ -20,17 +20,15 @@ class Register(View):
         patronymic = request.POST.get('patronymic')
 
         if (login and password and name and surname and patronymic):
-            session_id = ''.join(random.choice(
-                string.ascii_letters + string.punctuation) for x in range(15))
+            session_id = generate_session_id()
             new_user = User.objects.create(
-                login=login, password=password, name=name, surname=surname, patronymic=patronymic, session_id=session_id)
+                login=login, password=password, name=name, surname=surname, patronymic=patronymic, session_id=session_id, role=1)
             if (new_user):
                 response = redirect('/')
-                response.set_cookie('user_login', login, 30)
-                response.set_cookie('session_id', session_id, 30)
+                response.set_cookie('user_login', login, TOKEN_LIFE_TIME)
+                response.set_cookie('session_id', session_id, TOKEN_LIFE_TIME)
                 return response
-        else:
-            return render(request, self.template_name, context={'errors': 'Ошибка заполнения полей'})
+        return render(request, self.template_name, context={'errors': 'Ошибка заполнения полей'})
 
 
 class Login(View):
@@ -40,7 +38,20 @@ class Login(View):
         return render(request, self.template_name)
 
     def post(self, request):
-        return redirect('/')
+        login = request.POST.get('login')
+        password = request.POST.get('password')
+
+        if (login and password):
+            user = User.objects.filter(login=login, password=password)
+            if (user):
+                session_id = generate_session_id()
+                user.update(session_id=session_id)
+                response = redirect('/')
+                response.set_cookie('user_login', login, TOKEN_LIFE_TIME)
+                response.set_cookie('session_id', session_id, TOKEN_LIFE_TIME)
+                return response
+        return render(request, self.template_name, context={'errors': 'Неверный логин или пароль'})
+
 
 class Delete(View):
     template_name = 'index.html'
@@ -56,5 +67,4 @@ class Index(View):
 
     def get(self, request):
         users = User.objects.all()
-        if (users):
-            return render(request, self.template_name, context={'users': users})
+        return render(request, self.template_name, context={'users': users})

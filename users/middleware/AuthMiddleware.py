@@ -21,12 +21,12 @@ class AuthMiddleware:
                 if (user):
                     response = self.get_response(request)
                     return response
-                if (request.path != '/register'):
-                    return redirect('/register')
+                if (request.path != '/login'):
+                    return redirect('/login')
 
             except:
-                if (request.path != '/register'):
-                    return redirect('/register')
+                if (request.path != '/login'):
+                    return redirect('/login')
                 response = self.get_response(request)
                 return response
 

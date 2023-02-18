@@ -1,12 +1,24 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     <label for="login">Логин</label>
     <input id="login" name="login" type="text" required />
+
     <label for="password">Пароль</label>
     <input id="password" name="password" type="password" required />
+    
     <button type="submit">Войти</button>
   </form>
+  <hr>
+  <form action="{% url 'register' %}">
+    <button type='submit'>Зарегистрировать новый аккаунт</button>
+  </form>
+
+  {% if errors %}
+  <p>{{ errors }}</p>
+  {% endif %}
+
 {% endblock content %}
