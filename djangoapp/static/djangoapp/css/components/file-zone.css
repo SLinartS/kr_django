@@ -5,14 +5,14 @@
 }
 
 .file-zone__title {
-  background-color: #cbcbcb;
+  background-color: var(--white-dark);
   border-radius: 0.8rem 0.8rem 0 0;
   margin: 1rem;
   font-size: 2rem;
 }
 
 .file-zone__uploaded-files {
-  background-color: #cbcbcb;
+  background-color: var(--white-dark);
   border-radius: 0 0.8rem 0 0;
 }
 

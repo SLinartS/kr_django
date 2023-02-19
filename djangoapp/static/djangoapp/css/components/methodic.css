@@ -26,10 +26,10 @@
   font-size: 2rem;
   padding: 1rem;
   border-radius: 0.8rem;
-  background-color: #f1f1f1;
+  background-color: var(--white-light);
   width: 100%;
   max-width: 70rem;
-  border: 0.4rem solid #5dcec6;
+  border: 0.4rem solid var(--green);
   display: inline-block;
   margin: 0;
 }

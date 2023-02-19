@@ -3,7 +3,7 @@
 }
 
 .load__button {
-  background: #8E9F9E;
+  background: var(--gray);
   cursor: default;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .load__button--active {
-  background: #5dcec6;
+  background: var(--green);
   cursor: pointer;
 }
 

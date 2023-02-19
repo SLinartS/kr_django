@@ -1,6 +1,6 @@
 .works {
-  background-color: #e5e5e5;
-  color: #3d3d3d;
+  background-color: var(--white);
+  color: var(--black);
   font-size: 10px;
   display: grid;
   grid-template-columns: 3fr 8fr;

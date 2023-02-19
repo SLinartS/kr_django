@@ -1,6 +1,6 @@
 .menu {
-  background-color: #5dcec6;
-  color: #e5e5e5;
+  background-color: var(--green);
+  color: var(--white);
   font-size: 1.8rem;
   grid-row: 1/2;
 }
