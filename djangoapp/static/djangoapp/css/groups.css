@@ -1,63 +1,26 @@
-.main {
-  display: grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: 70% 30%;
-  gap: 30px;
-}
-
-.main__title {
-  font-size: 20px;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-}
-
-.list__item {
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 0;
-  outline: none;
-  text-decoration: none;
-}
-
-.list__item:active,
-.list__item:visited {
-  outline: none;
-  color: brown;
-}
-
-.list__text {
-  font-size: 16px;
-}
-
-.teachers {
-  grid-row: 1/2;
-  grid-column: 1/2;
-}
-  
 .groups {
-  grid-row: 1/2;
-  grid-column: 1/2;
+  background-color: #e5e5e5;
+  color: #3d3d3d;
+  font-size: 10px;
 }
 
-.info {
+.page__for-tutors {
+  grid-template-columns: 3.5fr 8fr 3fr;
+}
+
+.page__btn-for-stud {
   grid-row: 2/3;
-  grid-column: 1/2;
+  grid-column: 3/4;
 }
 
-.load {
+.page__file-zone {
   grid-row: 2/3;
   grid-column: 2/3;
+  background-color: #cbcbcb;
+  border-radius: 0 0.8rem 0 0;
 }
 
-.load form {
-  display: flex;
-  flex-direction: column;
-}
-
-.load form button {
-  width: fit-content;
+.page__metodic-download {
+  border: none;
+  background: transparent;
 }

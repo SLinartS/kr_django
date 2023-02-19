@@ -27,6 +27,7 @@ venv.bak/
 .history
 
 # Other # 
-/files
+files/
 */migrations/*.py
 !*/migrations/__init__.py
+.VSCodeCounter
