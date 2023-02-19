@@ -32,7 +32,7 @@
         <p>Информация отсутствует</p>
       {% endif %}
     </div>
-    <img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset="">
+    <a href="{% url 'logout' %}"><img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset=""></a> 
   </div>
 
   <div class="methodic">
@@ -56,11 +56,14 @@
   <div class="file-zone">
     <div class="file-zone__uploaded-files">
       <h3 class="file-zone__title">Сданные работы: </h3>
+      <div class="file-zone__file-list">
+
+      </div>
     </div>
     <form class="file-zone__button-form" action="{% url 'upload-work' teacher_id %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <label class="button load__label" for="file-input">Выбрать файл</label>
-      <input id="file-input" class="load__input" type="file" name="work" required />
+      <input id="file-input" class="load__input" type="file" multiple="multiple" name="work" required />
       <button class="button load__button" type="submit" disabled>Загрузить работу</button>
     </form>
   </div>

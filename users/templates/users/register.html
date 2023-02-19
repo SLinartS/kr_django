@@ -8,7 +8,7 @@
 {% block content %}
 <main class="login">
   <div class="auth-reg auth-reg">
-    <h4 class="auth-reg__title">Авторизация</h4>
+    <h4 class="auth-reg__title">Регистрация</h4>
     <form class="auth-reg__form" action="{% url 'register' %}" method="post">
       {% csrf_token %}
       <input class="auth-reg__input" placeholder="Логин" name="login" type="text" required/>

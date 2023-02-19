@@ -8,10 +8,14 @@
 }
 
 .methodic__list {
+  height: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   margin-top: 2rem;
+  padding-right: 2rem;
+  overflow-y: auto;
 }
 
 .methodic__list-item {

@@ -63,8 +63,9 @@ class Logout(View):
         try:
             user = get_auth_user(request)
             if (user):
-                user.update(session_id=None)
-                return redirect('/groups')
+                user.session_id=None
+                user.save()
+                return redirect('/login')
         except ValueError:
             return render(request, ERROR_PAGE_URL, contenx={'error': 'Ошибка выхода из аккаунта'})
 

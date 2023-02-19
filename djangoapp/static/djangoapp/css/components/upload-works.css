@@ -9,10 +9,14 @@
 }
 
 .upload-works__list {
+  height: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   margin: 2rem 2rem 0 0;
+  padding-right: 2rem;
+  overflow-y: auto;
 }
 
 .upload-works__list-item {

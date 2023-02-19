@@ -91,13 +91,15 @@ class UploadWork(View):
     template_name = 'djangoapp/works.html'
 
     def post(self, request, teacher_id):
-        file = request.FILES['work']
-        auth_user = get_auth_user(request)
-        random_url = generate_file_url() + path.splitext(file.name)[-1]
-        load_file(file, random_url)
+        files = request.FILES.getlist('work')
+        print(files);
+        for file in files:
+          auth_user = get_auth_user(request)
+          random_url = generate_file_url() + path.splitext(file.name)[-1]
+          load_file(file, random_url)
 
-        File.objects.create(title=file.name, url=random_url,
-                            author=auth_user, teacher=User.objects.get(id=teacher_id), type=FileType.objects.get(id=FILETYPE_WORK_ID))
+          File.objects.create(title=file.name, url=random_url,
+                              author=auth_user, teacher=User.objects.get(id=teacher_id), type=FileType.objects.get(id=FILETYPE_WORK_ID))
         return redirect(request.META.get('HTTP_REFERER'))
 
 
@@ -106,12 +108,18 @@ class UploadMaterial(View):
 
     def post(self, request):
         file = request.FILES['material']
+        title = request.POST['title']
+        if (title):
+            title = title.strip()
+        if (not title):
+            title = file.name.strip()
+        
         auth_user = get_auth_user(request)
         random_url = generate_file_url() + path.splitext(file.name)[-1]
 
         load_file(file, random_url)
 
-        File.objects.create(title=file.name, url=random_url,
+        File.objects.create(title=title, url=random_url,
                             author=auth_user, teacher=auth_user, type=FileType.objects.get(id=FILETYPE_MATERIAL_ID))
         return redirect(request.META.get('HTTP_REFERER'))
 

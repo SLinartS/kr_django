@@ -30,6 +30,7 @@
       {% csrf_token %}
       <label class="button load__label" for="file-input">Выбрать файл</label>
       <input id="file-input" class="load__input" type="file" name="material" required />
+      <input class="load__input--title" type="text" name="title" placeholder="Название материала"/>
 			<button class="button load__button" type="submit" disabled>Загрузить работу</button>
     </form>
     <div class="methodic__list">
@@ -63,7 +64,7 @@
         <p>Информация отсутствует</p>
       {% endif %}
     </div>
-    <img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset="">
+    <a href="{% url 'logout' %}"><img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset=""></a> 
   </div>
 	<script src="{% static 'djangoapp/js/index.js' %}"></script>
 </main>

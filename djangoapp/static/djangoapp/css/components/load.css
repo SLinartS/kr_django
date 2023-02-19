@@ -2,6 +2,15 @@
   display: none;
 }
 
+.load__input--title {
+  background: var(--white-light);
+  height: 3rem;
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--black);
+  font-size: 1.6rem;
+  min-width: 20rem;
+}
+
 .load__button {
   background: var(--gray);
   cursor: default;

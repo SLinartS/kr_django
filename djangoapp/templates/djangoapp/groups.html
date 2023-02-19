@@ -32,7 +32,7 @@
           <p>Информация отсутствует</p>
         {% endif %}
       </div>
-      <img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset="">
+      <a href="{% url 'logout' %}"><img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset=""></a> 
     </div>
 
     <div class="upload-works">
