@@ -46,7 +46,7 @@ class Groups(View):
         else:
             files = File.objects.filter(
                 type=FileType.objects.get(id=FILETYPE_WORK_ID))
-        groups = Group.objects.all()
+        groups = Group.objects.filter(users__id=auth_user.id)
         return render(request, self.template_name, context={
             'auth_user': auth_user,
             'groups': groups,
@@ -82,7 +82,7 @@ class Delete(View):
     def post(self, request, id):
         try:
             delete_file(id)
-            return redirect('/groups')
+            return redirect(request.META.get('HTTP_REFERER'))
         except Exception as e:
             return render(request, ERROR_PAGE_URL, context={'error': e})
 
@@ -93,12 +93,12 @@ class UploadWork(View):
     def post(self, request, teacher_id):
         file = request.FILES['work']
         auth_user = get_auth_user(request)
-        random_url = generate_file_url()
+        random_url = generate_file_url() + path.splitext(file.name)[-1]
         load_file(file, random_url)
 
         File.objects.create(title=file.name, url=random_url,
                             author=auth_user, teacher=User.objects.get(id=teacher_id), type=FileType.objects.get(id=FILETYPE_WORK_ID))
-        return redirect('works')
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 class UploadMaterial(View):
@@ -113,7 +113,7 @@ class UploadMaterial(View):
 
         File.objects.create(title=file.name, url=random_url,
                             author=auth_user, teacher=auth_user, type=FileType.objects.get(id=FILETYPE_MATERIAL_ID))
-        return redirect('materials')
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 class Download(View):

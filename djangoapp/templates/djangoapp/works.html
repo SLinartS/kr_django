@@ -2,81 +2,69 @@
 {% load static %}
 
 {% block link %}
-  <link rel="stylesheet" href="{% static 'djangoapp/css/works.css' %} ">
+  <link rel="stylesheet" href="{% static 'djangoapp/css/style.css' %} ">
 {% endblock link %}
 
 
 {% block content %}
 <main class="works">
-  <div class="page page__for-students">
-    <div class="page__menu">
-      <h4 class="page__title">Преподаватели</h4>
-      <hr size="3rem" color="E5E5E5">
-      <div class="page__list">
-        {% if users %} 
-        {% for user in users %}
-          <a class="page__list-elem" href="{% url 'works' %}?teacher={{user.id}}">{{ user.name }} {{ user.patronymic }}</a>
-        {% endfor %} 
-        {% else %}
-          <p>Группы отсутствуют</p>
-        {% endif %}
-      </div>
+  <div class="menu">
+    <h4 class="menu__title">Преподаватели</h4>
+    <hr size="3rem" color="E5E5E5">
+    <div class="menu__list">
+      {% if users %} 
+      {% for user in users %}
+        <a class="menu__list-elem" href="{% url 'works' %}?teacher={{user.id}}">{{ user.name }} {{ user.patronymic }}</a>
+      {% endfor %} 
+      {% else %}
+        <p>Группы отсутствуют</p>
+      {% endif %}
     </div>
+  </div>
 
-    <div class="page_user-info">
-      <div>
-        {% if auth_user %}
-          <p class="page__user-role">Студент</p>
-          <p class="page__user-group">Группа 19ИСП-429</p>
-          <p class="page__user-name">{{ auth_user.name }} {{ auth_user.surname }}</p>
-        {% else %}
-          <p>Информация отсутствует</p>
-        {% endif %}
-      </div>
-      <svg width="35" height="35" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M46.1371 25.5746C47.2846 24.4271 47.2846 22.5637 46.1371 21.4162L34.3871 9.66621C33.2396 8.51875 31.3762 8.51875 30.2287 9.66621C29.0812 10.8137 29.0812 12.6771 30.2287 13.8246L36.9666 20.5625H17.625C16.0002 20.5625 14.6875 21.8752 14.6875 23.5C14.6875 25.1248 16.0002 26.4375 17.625 26.4375H36.9666L30.2287 33.1754C29.0812 34.3229 29.0812 36.1863 30.2287 37.3338C31.3762 38.4813 33.2396 38.4813 34.3871 37.3338L46.1371 25.5838V25.5746ZM14.6875 8.8125C16.3123 8.8125 17.625 7.4998 17.625 5.875C17.625 4.2502 16.3123 2.9375 14.6875 2.9375H8.8125C3.94727 2.9375 0 6.88477 0 11.75V35.25C0 40.1152 3.94727 44.0625 8.8125 44.0625H14.6875C16.3123 44.0625 17.625 42.7498 17.625 41.125C17.625 39.5002 16.3123 38.1875 14.6875 38.1875H8.8125C7.18769 38.1875 5.875 36.8748 5.875 35.25V11.75C5.875 10.1252 7.18769 8.8125 8.8125 8.8125H14.6875Z"
-          fill="#E5E5E5" />
-      </svg>
+  <div class="user-info">
+    <div>
+      {% if auth_user %}
+        <p class="user__role">{{ auth_user.role.alias }}</p>
+        <p class="user__group">{{ auth_user.group_set.all.0.title }}</p>
+        <p class="user__name">{{ auth_user.name }} {{ auth_user.surname }}</p>
+      {% else %}
+        <p>Информация отсутствует</p>
+      {% endif %}
     </div>
-    <div class="page__work-zone">
-      <h4 class="page__title">Методические материалы</h4>
-      {% if files %} {% for file in files %}
-        <div class="page__metodic">
-            <p class="page__metodic-elem">{{ file.title }}</p>
-            <a href="{% url 'download' file.url %}" download="{{ file.title }}">
-              <button class="page__metodic-download" type="button">
-                <svg class="svg" width="29" height="39" viewBox="0 0 29 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_3_55)">
-                    <path
-                      d="M4.83333 0C2.16745 0 0 2.18613 0 4.875V34.125C0 36.8139 2.16745 39 4.83333 39H24.1667C26.8326 39 29 36.8139 29 34.125V12.1875H19.3333C17.9966 12.1875 16.9167 11.0982 16.9167 9.75V0H4.83333ZM19.3333 0V9.75H29L19.3333 0ZM16.3125 17.6719V25.449L18.6536 23.0877C19.3635 22.3717 20.5115 22.3717 21.2138 23.0877C21.9161 23.8037 21.9237 24.9615 21.2138 25.6699L15.7763 31.1543C15.0664 31.8703 13.9185 31.8703 13.2161 31.1543L7.77865 25.6699C7.06875 24.9539 7.06875 23.7961 7.77865 23.0877C8.48854 22.3793 9.63646 22.3717 10.3388 23.0877L12.6799 25.449V17.6719C12.6799 16.6588 13.488 15.8438 14.4924 15.8438C15.4969 15.8438 16.3049 16.6588 16.3049 17.6719H16.3125Z"
-                      fill="#5DCEC6" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_3_55">
-                      <rect width="29" height="39" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </button>
-            </a>
-        </div>
-      {% endfor %} {% else %}
+    <img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset="">
+  </div>
+
+  <div class="methodic">
+    <h4 class="methodic__title">Методические материалы</h4>
+    <div class="methodic__list">
+      {% if files %} 
+        {% for file in files %}
+          <div class="methodic__list-item">
+              <p class="methodic__text">{{ file.title }}</p>
+              <a class="link-wrapper" href="{% url 'download' file.url %}" download="{{ file.title }}">
+                <img class='icon' src="{% static 'djangoapp/icons/download.svg' %}" alt="" srcset="">
+              </a>
+          </div>
+        {% endfor %} 
+      {% else %}
         <p>Методические материалы отсутствуют</p>
       {% endif %}
     </div>
-    <div class="page__file-zone">
-      <p>ОКНО ДЛЯ СДАЧИ РАБОТ</p>
-    </div>
-    <div class="page__button-for-stud">
-      <form action="{% url 'upload-work' teacher_id %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input class="load__input" type="file" name="work" required>
-        <button class="button load__input">Загрузить работу</button>
-        <button class="button load__button" type="submit" disabled>Сдать работу</button>
-      </form>
-    </div>
   </div>
+
+  <div class="file-zone">
+    <div class="file-zone__uploaded-files">
+      <h3 class="file-zone__title">Сданные работы: </h3>
+    </div>
+    <form class="file-zone__button-form" action="{% url 'upload-work' teacher_id %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label class="button load__label" for="file-input">Выбрать файл</label>
+      <input id="file-input" class="load__input" type="file" name="work" required />
+      <button class="button load__button" type="submit" disabled>Загрузить работу</button>
+    </form>
+  </div>
+
   <script src="{% static 'djangoapp/js/index.js' %}"></script>
 </main>
 

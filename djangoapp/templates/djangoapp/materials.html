@@ -1,46 +1,70 @@
-{% extends 'layout.html' %} {% load static %} {% block link %}
+{% extends 'layout.html' %} {% load static %} 
+
+
+
+{% block link %}
 <link rel="stylesheet" href="{% static 'djangoapp/css/style.css' %} " />
-{% endblock link %} {% block content %}
-<main class="main">
-	<div class="materials">
-		<h3 class="main__title">Методические материалы</h3>
-		<div class="materials__list list">
-			{% if files %} {% for file in files %}
-			<div class="list__item">
-				<p class="list__text">{{ file.title }}</p>
-				<a href="{% url 'download' file.url %}" download="{{ file.title }}">
-					<button type="button">Скачать</button>
-				</a>
-				<form action="{% url 'delete' file.id %}" method="post">
-					{% csrf_token %}
-					<button type="submit">Удалить</button>
-				</form>
-			</div>
-			{% endfor %} {% else %}
-			<p>Нет файлов и всё тут</p>
-			{% endif %}
-		</div>
-	</div>
+{% endblock link %} 
 
-	<div class="info">
-		<h3 class="main__title">Текущий пользователь</h3>
-		<div class="info__list list">
-			{% if auth_user %}
-			<p class="list__item">{{ auth_user.name }} {{ auth_user.surname }}</p>
-			{% else %}
-			<p>Нет информации всё тут</p>
-			{% endif %}
-		</div>
-	</div>
+{% block content %}
+<main class="materials">
+  <div class="menu">
+    <h4 class="menu__title">Материалы</h4>
+    <hr size="3rem" color="E5E5E5">
+    <div class="menu__list">
+      <div class="menu__toggle-page">
+        <img class='icon' src="{% static 'djangoapp/icons/toggle.svg' %}" alt="">
+        <a class="menu__list-elem" href="{% url 'groups' %}">Группы</a>
+      </div>
+      {% if groups %} {% for group in groups %}
+        <a class="menu__list-elem" href="{% url 'groups' %}?group={{group.id}}">{{ group.title }}</a>
+      {% endfor %} {% else %}
+        <p>Группы отсутствуют</p>
+      {% endif %}
+    </div>
+  </div>
 
-	<div class="load">
-		<form action="{% url 'upload-material' %}" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<input class="load__input" type="file" name="material" required />
-			<button class="load__button" type="submit" disabled>Загрузить работу</button>
-		</form>
-	</div>
-  <a href="{% url 'groups' %}">Группы</a>
+  <div class="methodic">
+    <h4 class="methodic__title">Методические материалы</h4>
+    <form class="methodic__button-form" action="{% url 'upload-material' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label class="button load__label" for="file-input">Выбрать файл</label>
+      <input id="file-input" class="load__input" type="file" name="material" required />
+			<button class="button load__button" type="submit" disabled>Загрузить работу</button>
+    </form>
+    <div class="methodic__list">
+      {% if files %} 
+        {% for file in files %}
+          <div class="methodic__list-item">
+              <p class="methodic__text">{{ file.title }}</p>
+              <a class="link-wrapper" href="{% url 'download' file.url %}" download="{{ file.title }}">
+                <img class='icon' src="{% static 'djangoapp/icons/download.svg' %}" alt="" srcset="">
+              </a>
+              <form class="form-wrapper" action="{% url 'delete' file.id %}" method="post">
+                {% csrf_token %}
+                <button class="button-wrapper" type="submit">
+                  <img class='icon' src="{% static 'djangoapp/icons/delete.svg' %}" alt="" srcset="">
+                </button>
+              </form>
+          </div>
+        {% endfor %} 
+      {% else %}
+        <p>Методические материалы отсутствуют</p>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="user-info">
+    <div>
+      {% if auth_user %}
+      <p class="user-info__role">{{ auth_user.role.alias }}</p>
+      <p class="user-info__name">{{ auth_user.name }} {{ auth_user.surname }}</p>
+      {% else %}
+        <p>Информация отсутствует</p>
+      {% endif %}
+    </div>
+    <img class='icon' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset="">
+  </div>
 	<script src="{% static 'djangoapp/js/index.js' %}"></script>
 </main>
 

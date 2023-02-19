@@ -1,0 +1,29 @@
+.load__input {
+  display: none;
+}
+
+.load__button {
+  background: #8E9F9E;
+  cursor: default;
+}
+
+.load__button:hover {
+  filter: none;
+}
+
+.load__button:active {
+  filter: none;
+}
+
+.load__button--active {
+  background: #5dcec6;
+  cursor: pointer;
+}
+
+.load__button--active:hover {
+  filter: brightness(1.1);
+}
+
+.load__button--active:active {
+  filter: brightness(0.9);
+}

@@ -1,63 +1,21 @@
-.main {
-  display: grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: 70% 30%;
-  gap: 30px;
-}
+@import './groups.css';
+@import './materials.css';
+@import './works.css';
+@import './components/menu.css';
+@import './components/methodic.css';
+@import './components/user-info.css';
+@import './components/upload-works.css';
+@import './components/load.css';
+@import './components/file-zone.css';
 
-.main__title {
-  font-size: 20px;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-}
-
-.list__item {
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 0;
-  outline: none;
-  text-decoration: none;
-}
-
-.list__item:active,
-.list__item:visited {
-  outline: none;
-  color: brown;
-}
-
-.list__text {
-  font-size: 16px;
-}
-
-.teachers {
-  grid-row: 1/2;
-  grid-column: 1/2;
-}
-  
-.groups {
-  grid-row: 1/2;
-  grid-column: 2/3;
-}
-
-.info {
-  grid-row: 2/3;
-  grid-column: 1/2;
-}
-
-.load {
-  grid-row: 2/3;
-  grid-column: 2/3;
-}
-
-.load form {
-  display: flex;
-  flex-direction: column;
-}
-
-.load form button {
+.button-wrapper,
+.form-wrapper,
+.link-wrapper {
+  color: transparent;
+  background: transparent;
+  border: none;
   width: fit-content;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
 }

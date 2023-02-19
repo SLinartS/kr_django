@@ -1,7 +1,13 @@
 @import url('./normalize.css');
+@import url('./components/button.css');
+@import url('./components/icon.css');
+
+a {
+  text-decoration: none;
+}
 
 a:visited {
-  color: inherit
+  color: inherit;
 }
 
 html {
@@ -11,114 +17,12 @@ html {
   font-family: 'Mulish', sans-serif;
 }
 
-body {
-  height: 100%;
-  width: 100%;
-}
-
+body,
 main {
   height: 100%;
   width: 100%;
 }
 
-.page__html {
-  background-color: #e5e5e5;
-  color: #3d3d3d;
-  font-size: 10px;
-}
-
-.page {
-  margin: 0;
-  display: grid;
-  grid-template-rows: 5fr 1fr;
-  height: 100%;
-}
-
-/* ГРУППОВЫЕ */
-.button,
-.page_user-info,
-.page__menu {
-  color: #e5e5e5;
-  font-size: 1.8rem;
-}
-
-.page__metodic-elem,
-.page__user-name,
-.page__work-stud {
-  font-size: 2rem;
-}
-
-.page__metodic-elem,
-.button,
-.page__work-stud {
-  padding: 1rem;
-  border-radius: 0.8rem;
-}
-
-.svg,
-.button {
-  margin: 1rem;
-}
-
-html,
-body {
-  margin: 0;
-}
-
-/* ГЛОБАЛЬНЫЕ */
-
-.button {
-  border: none;
-  background-color: #5dcec6;
-  min-width: 20rem;
-  padding: 1rem 2rem;
-}
-
-
-.page__menu {
-  background-color: #5dcec6;
-  grid-row: 1/2;
-}
-
-.page__title {
-  font-size: 4rem;
-  margin: 2rem;
-}
-
-.page__list {
-  font-size: 2.4rem;
-  margin: 3rem 4rem;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-}
-
-.page__list-elem {
-  padding: 0.8rem;
-  text-decoration: none;
-}
-
-.page__metodic {
-  display: flex;
-  align-items: center;
-}
-
-.page__metodic-elem {
-  background-color: #f1f1f1;
-  width: 70rem;
-  border: 0.4rem solid #5dcec6;
-  display: inline-block;
-}
-
-.page__work-zone {
-  margin: 0 0 0 6rem;
-}
-
-.page_user-info {
-  grid-row: 2/3;
-  background-color: #21a597;
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  padding: 1rem;
-}
+/* * {
+  outline: solid red;
+} */

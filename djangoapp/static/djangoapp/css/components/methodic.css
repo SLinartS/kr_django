@@ -1,0 +1,35 @@
+.methodic {
+  margin: 0 2rem 0 5rem;
+}
+
+.methodic__title {
+  font-size: 4rem;
+  margin: 2rem;
+}
+
+.methodic__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  margin-top: 2rem;
+}
+
+.methodic__list-item {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  border-radius: 0.8rem;
+}
+
+.methodic__text {
+  display: flex;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  background-color: #f1f1f1;
+  width: 100%;
+  max-width: 70rem;
+  border: 0.4rem solid #5dcec6;
+  display: inline-block;
+  margin: 0;
+}

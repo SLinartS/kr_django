@@ -1,0 +1,51 @@
+.menu {
+  background-color: #5dcec6;
+  color: #e5e5e5;
+  font-size: 1.8rem;
+  grid-row: 1/2;
+}
+
+.menu__toggle-page {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  transition: filter 0.1s ease-in-out;
+}
+
+.menu__toggle-page img {
+  padding-left: 1rem;
+}
+
+.menu__toggle-page:hover {
+  filter: brightness(1.1);
+}
+
+.menu__toggle-page:active {
+  filter: brightness(0.9);
+}
+
+.menu__title {
+  font-size: 4rem;
+  margin: 2rem;
+}
+
+.menu__list {
+  font-size: 2.4rem;
+  margin: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.menu__list-elem {
+  padding: 0.8rem;
+  transition: filter 0.1s ease-in-out;
+}
+
+.menu__list-elem:hover {
+  filter: brightness(1.1);
+}
+
+.menu__list-elem:active {
+  filter: brightness(0.9);
+}
