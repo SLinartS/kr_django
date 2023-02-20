@@ -33,6 +33,7 @@
   background-color: var(--white-light);
   width: 100%;
   max-width: 70rem;
+  min-width: 15rem;
   border: 0.4rem solid var(--green);
   display: inline-block;
   margin: 0;

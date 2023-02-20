@@ -4,6 +4,7 @@
 @import url('./components/icon.css');
 
 a {
+  color: var(--white);
   text-decoration: none;
 }
 

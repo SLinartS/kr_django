@@ -11,18 +11,15 @@
     <h4 class="auth-reg__title">Авторизация</h4>
     <form class="auth-reg__form" action="{% url 'login' %}" method="post">
       {% csrf_token %}
+      <p class="login__error" >{{ errors }}</p>
       <input class="auth-reg__input" placeholder="Логин" name="login" type="text" required />
+      <p class="login__error" ></p>
       <input class="auth-reg__input" placeholder="Пароль" name="password" type="password" required />
       <button class="button button__auth" type="submit">Войти</button>
     </form>
     <a href="{% url 'register' %}" class="auth-reg__link"
       >Зарегистрировать новый аккаунт</a
     >
-  </div>
-
-  {% if errors %}
-  <p>{{ errors }}</p>
-  {% endif %}
-
+  </div>  
 </main>
 {% endblock content %}

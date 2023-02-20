@@ -11,10 +11,15 @@
     <h4 class="auth-reg__title">Регистрация</h4>
     <form class="auth-reg__form" action="{% url 'register' %}" method="post">
       {% csrf_token %}
+      <p class="login__error" >{{ errors.login.0 }}</p>
       <input class="auth-reg__input" placeholder="Логин" name="login" type="text" required/>
+      <p class="login__error" >{{ errors.password.0 }}</p>
       <input class="auth-reg__input" placeholder="Пароль" name="password" type="password" required />
+      <p class="login__error" >{{ errors.name.0 }}</p>
       <input class="auth-reg__input" placeholder="Имя" name="name" type="text" required />
+      <p class="login__error" >{{ errors.surname.0 }}</p>
       <input class="auth-reg__input" placeholder="Фамилия" name="surname" type="text" required />
+      <p class="login__error" >{{ errors.patronymic.0 }}</p>
       <input class="auth-reg__input" placeholder="Отчество" name="patronymic" type="text" />
       <button class="button button__auth" type="submit">Зарегистрироваться</button>
     </form>
@@ -22,11 +27,6 @@
       >Уже есть аккаунт? Войти
     </a>
   </div>
-
-  {% if errors %}
-    <p>{{ errors }}</p>
-  {% endif %}
-
 </main>
 {% endblock content %}
 
