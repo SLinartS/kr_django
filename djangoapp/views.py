@@ -49,12 +49,12 @@ class Groups(View):
         if (group_id):
             # Получаем юзеров, которые находятся в той же группе
             # что и текущий пользователь (преподаватель)
-            users_from_authuser_group = User.objects.filter(
+            users_from_auth_user_group = User.objects.filter(
                 group__in=Group.objects.filter(users__id=auth_user.id))
             # Получаем работы найденных студентов
             works_of_users = File.objects.filter(
                 type=FileType.objects.get(id=FILETYPE_WORK_ID),
-                author__in=users_from_authuser_group)
+                author__in=users_from_auth_user_group)
             # Получаем только те файлы, авторы которых принадлежат
             # выбранной в данной момент группе
             files = works_of_users.filter(author__in=User.objects.filter(
@@ -83,12 +83,18 @@ class Works(View):
         teacher_id = request.GET.get('teacher')
         auth_user = get_auth_user(request)
         if (teacher_id):
-            files = File.objects.filter(
+            files_materials = File.objects.filter(
                 type=FileType.objects.get(id=FILETYPE_MATERIAL_ID),
                 author=User.objects.get(id=teacher_id))
+            files_works = File.objects.filter(
+                type=FileType.objects.get(id=FILETYPE_WORK_ID),
+                teacher__in=User.objects.filter(id=teacher_id),
+                author__in=User.objects.filter(id=auth_user.id)
+            )
         else:
-            files = File.objects.filter(
+            files_materials = File.objects.filter(
                 type=FileType.objects.get(id=FILETYPE_MATERIAL_ID))
+            files_works = []
         users = User.objects.filter(role=Role.objects.get(id=ROLE_TEACHER_ID))
 
         download_access = User.objects.filter(group__in=Group.objects.filter(users__id=auth_user.id),
@@ -105,7 +111,8 @@ class Works(View):
         return render(request, self.template_name, context={
             'auth_user': auth_user,
             'users': users,
-            'files': files,
+            'files_materials': files_materials,
+            'files_works': files_works,
             'download_access': not download_access,
             'teacher_id': teacher_id
         })

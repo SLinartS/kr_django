@@ -2,6 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 8fr auto;
+  grid-column: 2/4;
 }
 
 .file-zone__title {

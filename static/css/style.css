@@ -1,8 +1,10 @@
 @import url('./normalize.css');
 @import url('./color.css');
+@import url('./scrollbar.css');
 @import url('./components/button.css');
 @import url('./components/select.css');
 @import url('./components/icon.css');
+
 
 a {
   color: var(--white);
@@ -24,6 +26,7 @@ body,
 main {
   height: 100%;
   width: 100%;
+  background: var(--white);
 }
 
 * {

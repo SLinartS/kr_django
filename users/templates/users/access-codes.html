@@ -21,6 +21,7 @@
       <p class="access-codes__code">{{ domain }}/register?code={{ code.code }}</p>
       <p class="access-codes__alias">{{ code.role.title }}</p>
     {% endfor %}
-  </div>  
+  </div>
+  <a href="{% url 'logout' %}"><img class='icon access-codes__exit' src="{% static 'djangoapp/icons/exit.svg' %}" alt="" srcset=""></a>  
 </main>
 {% endblock content %}

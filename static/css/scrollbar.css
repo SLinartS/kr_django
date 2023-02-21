@@ -1,0 +1,32 @@
+div::-webkit-scrollbar,
+main::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+}
+
+div::-webkit-scrollbar-track,
+main::-webkit-scrollbar-track,
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 1rem;
+}
+
+div::-webkit-scrollbar-corner,
+main::-webkit-scrollbar-corner,
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+div::-webkit-scrollbar-thumb,
+main::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 0.7rem;
+  border: 0.3rem solid transparent;
+  background-clip: content-box;
+}

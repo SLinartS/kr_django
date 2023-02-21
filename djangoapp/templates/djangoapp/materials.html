@@ -28,7 +28,7 @@
     <h4 class="methodic__title">Методические материалы</h4>
     <form class="methodic__button-form" action="{% url 'upload-material' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <label class="button load__label" for="file-input">Выбрать файл</label>
+      <label class="button load__label load__button--active" for="file-input">Выбрать файл</label>
       <input id="file-input" class="load__input" type="file" name="material" required />
       <input class="load__input--title" type="text" name="title" placeholder="Название материала"/>
 			<button class="button load__button" type="submit" disabled>Загрузить работу</button>

@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="{% static 'djangoapp/css/style.css' %} ">
 {% endblock link %}
 
-
 {% block content %}
 <main class="works">
   <div class="menu">
@@ -36,10 +35,10 @@
   </div>
 
   <div class="methodic">
-    <h4 class="methodic__title">Методические материалы</h4>
-    <div class="methodic__list">
-      {% if files %} 
-        {% for file in files %}
+    <h4 class="methodic__title methodic__title--works">Методические материалы</h4>
+    <div class="methodic__list methodic__list--works">
+      {% if files_materials %} 
+        {% for file in files_materials %}
           <div class="methodic__list-item">
               <p class="methodic__text">{{ file.title }}</p>
               <a class="link-wrapper" href="{% url 'download' file.url %}" download="{{ file.title }}">
@@ -53,11 +52,38 @@
     </div>
   </div>
 
+  <div class="upload-works upload-works--works">
+    <h4 class="upload-works__title upload-works__title--works">Загруженные работы</h4>
+    <div class="upload-works__list">
+      {% if files_works %} 
+        {% for file in files_works %}
+          <div class="upload-works__list-item upload-works__list-item--works">
+            <div class="upload-works__text-block">
+              <p class="upload-works__text upload-works__text--works">{{ file.title }}</p>
+              <p class="upload-works__text">{{ file.author.name }} {{ file.author.surname }}</p>
+            </div>
+            <a class="link-wrapper" href="{% url 'download' file.url %}" download="{{ file.title }}">
+              <button class="button-wrapper" type="button">
+                <img class='icon' src="{% static 'djangoapp/icons/download.svg' %}" alt="" srcset="">
+              </button>
+            </a>
+            <form class="form-wrapper" action="{% url 'delete' file.id %}" method="post">
+              {% csrf_token %}
+              <button class="button-wrapper" type="submit">
+                <img class='icon' src="{% static 'djangoapp/icons/delete.svg' %}" alt="" srcset="">
+              </button>
+            </form>
+          </div>
+        {% endfor %} {% else %}
+          <p class="upload-works__list-item upload-works__list-item--undefined">Загруженные работы отсутствуют</p>
+      {% endif %}
+    </div>
+  </div>
+
   <div class="file-zone">
     <div class="file-zone__uploaded-files">
       <h3 class="file-zone__title">Сданные работы: </h3>
       <div class="file-zone__file-list">
-
       </div>
     </div>
     <form class="file-zone__button-form" action="{% url 'upload-work' teacher_id %}" method="post" enctype="multipart/form-data">
