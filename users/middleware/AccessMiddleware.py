@@ -26,7 +26,7 @@ class AccessMiddleware:
                     '/groups',
                     '/upload-material',
                     '/delete',
-                    '/download'
+                    '/download',
                 ]
                 for path in array:
                     if (re.search(path, request.path)):
@@ -34,7 +34,12 @@ class AccessMiddleware:
                 return redirect('/materials')
 
             case constants.ROLE_STUDENT_ID:
-                array = ['/works', '/upload-work', '/download']
+                array = [
+                    '/works',
+                    '/upload-work',
+                    '/download',
+                    '/delete',
+                ]
                 for path in array:
                     if (re.search(path, request.path)):
                         return self.get_response(request)
