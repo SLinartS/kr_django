@@ -24,13 +24,17 @@
   align-items: center;
   column-gap: 1rem;
   border-radius: 0.8rem;
+  font-size: 2rem;
+}
+
+.upload-works__list-item--undefined {
+  margin-left: 2rem;
 }
 
 .upload-works__text-block {
   display: flex;
   column-gap: 2rem;
   align-items: center;
-  font-size: 2rem;
   padding: 1rem;
   border-radius: 0.8rem;
   background-color: var(--white-light);

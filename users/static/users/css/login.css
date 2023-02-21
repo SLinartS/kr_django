@@ -34,7 +34,7 @@
 
 .auth-reg__title {
   font-size: 6rem;
-  margin: 4rem;
+  margin: 3rem 0 1rem 0;
 }
 
 .auth-reg__input {
@@ -42,7 +42,7 @@
   border-radius: 0.8rem;
   font-size: 2rem;
 
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 0.4rem 0;
   padding: 1.2rem 1rem;
   width: 40.6rem;
 

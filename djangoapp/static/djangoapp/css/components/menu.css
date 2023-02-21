@@ -31,15 +31,24 @@
 
 .menu__list {
   font-size: 2.4rem;
-  margin: 3rem 4rem;
+  margin: 0 0 0 2rem;
+  padding: 2rem 2rem 2rem 0;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+  overflow-y: auto;
+  height: 85%;
+  box-sizing: border-box;
+}
+
+.menu__hr {
+  margin: 0;
 }
 
 .menu__list-elem {
   padding: 0.8rem;
   transition: filter 0.1s ease-in-out;
+  margin: 0;
 }
 
 .menu__list-elem:hover {
@@ -48,4 +57,17 @@
 
 .menu__list-elem:active {
   filter: brightness(0.9);
+}
+
+.menu__list-elem--undefined {
+  cursor: default;
+  pointer-events: none;
+}
+
+.menu__list-elem--undefined:hover {
+  filter: none;
+}
+
+.menu__list-elem--undefined:active {
+  filter: none;
 }

@@ -14,21 +14,16 @@ class AuthMiddleware:
         user_login = request.COOKIES.get('user_login')
         session_id = request.COOKIES.get('session_id')
 
-        if (request.path == '/login' or request.path == '/register'):
-            return self.get_response(request)
-
         if (user_login and session_id):
-            try:
-                user = User.objects.get(
-                    login=user_login, session_id=session_id)
-                if (user):
+            users = User.objects.filter(
+                login=user_login, session_id=session_id)
+            if (users and users[0]):
+                if (request.path not in ['/login', '/register']):
                     return self.get_response(request)
-            except:
-                if (request.path != '/login'):
-                    return redirect('/login')
-                response = self.get_response(request)
-                return response
-
+                return redirect(request.META.get('HTTP_REFERER')) if request.META.get('HTTP_REFERER') else redirect('/')
+            else:
+                if (request.path in ['/login', '/register']):
+                    return self.get_response(request)
         if (request.path != '/login'):
             return redirect('/login')
         return self.get_response(request)

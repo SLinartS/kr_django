@@ -4,5 +4,5 @@
   font-size: 10px;
   display: grid;
   grid-template-columns: 3fr 8fr;
-  grid-template-rows: 85% 15%;
+  grid-template-rows: 80% 20%;
 }

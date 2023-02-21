@@ -4,23 +4,27 @@
 
 .load__input--title {
   background: var(--white-light);
-  height: 3rem;
+  height: 3.8rem;
   border-radius: 0.8rem;
   border: 0.1rem solid var(--black);
   font-size: 1.6rem;
+  padding-left: 1rem;
   min-width: 20rem;
 }
 
-.load__button {
+.load__button,
+.load__label {
   background: var(--gray);
   cursor: default;
 }
 
-.load__button:hover {
+.load__button:hover,
+.load__label:hover {
   filter: none;
 }
 
-.load__button:active {
+.load__button:active,
+.load__label:active {
   filter: none;
 }
 

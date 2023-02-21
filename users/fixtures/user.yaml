@@ -3,74 +3,84 @@
   fields:
       login: admin
       password: admin
+      name: admin
+      surname: admin
+      patronymic: admin
+      role: 3
+
+- model: users.user
+  pk: 2
+  fields:
+      login: teacher
+      password: teacher
       name: Иван
       surname: Иванов
       patronymic: Иванович
       role: 1
 
 - model: users.user
-  pk: 2
+  pk: 3
   fields:
-      login: random
-      password: random
+      login: random1
+      password: random1
       name: Алексадр
       surname: Александров
       patronymic: Александрович
       role: 1
 - model: users.user
-  pk: 3
+  pk: 4
   fields:
-      login: random
-      password: random
+      login: random2
+      password: random2
       name: Абстракт
       surname: Абстрактов
       patronymic: Абстрактович
       role: 1
 - model: users.user
-  pk: 4
+  pk: 5
   fields:
-      login: random
-      password: random
+      login: random3
+      password: random3
       name: Михаил
       surname: Михайлов
       patronymic: Михайлович
       role: 1
 
 - model: users.user
-  pk: 5
+  pk: 6
   fields:
-      login: random
-      password: random
+      login: student
+      password: student
       name: Евгения
       surname: Евгеньева
       patronymic: Евгеньевна
       role: 2
 
 - model: users.user
-  pk: 6
+  pk: 7
   fields:
-      login: random
-      password: random
+      login: random4
+      password: random4
       name: Пётр
       surname: Петров
       patronymic: Петрович
       role: 2
 
 - model: users.user
-  pk: 7
+  pk: 8
   fields:
-      login: random
-      password: random
+      login: random5
+      password: random5
       name: Василий
       surname: Глазков
       patronymic: Сергеевич
       role: 2
 
 - model: users.user
-  pk: 8
+  pk: 9
   fields:
-      login: random
-      password: random
+      login: random6
+      password: random6
       name: Григорий
       surname: Григорьев
       patronymic: Григорьевич

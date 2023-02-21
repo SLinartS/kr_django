@@ -1,6 +1,7 @@
 @import url('./normalize.css');
 @import url('./color.css');
 @import url('./components/button.css');
+@import url('./components/select.css');
 @import url('./components/icon.css');
 
 a {
@@ -23,6 +24,10 @@ body,
 main {
   height: 100%;
   width: 100%;
+}
+
+* {
+  user-select: none;
 }
 
 /* * {

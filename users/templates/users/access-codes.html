@@ -1,0 +1,26 @@
+{% extends 'layout.html' %} 
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'users/css/access-codes.css' %}">
+{% endblock link %}
+
+{% block content %}
+<main class="access-codes">
+  <form action="{% url 'generate-code' %}" method="post">
+    {% csrf_token %}
+    <button class="button" type="submit">Создать</button>
+    <select class="select" name="role">
+        {% for role in roles  %}
+          <option value="{{ role.title }}">{{ role.title }}</option>
+        {% endfor %}
+    </select>
+  </form>
+  <div class="access-codes__list">
+    {% for code in access_codes %}
+      <p class="access-codes__code">{{ domain }}/register?code={{ code.code }}</p>
+      <p class="access-codes__alias">{{ code.role.title }}</p>
+    {% endfor %}
+  </div>  
+</main>
+{% endblock content %}

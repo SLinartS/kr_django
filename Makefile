@@ -17,5 +17,6 @@ seed:
 	python .\manage.py loaddata role.yaml && \
 	python .\manage.py loaddata user.yaml && \
 	python .\manage.py loaddata filetype.yaml && \
-	python .\manage.py loaddata groups.yaml
+	python .\manage.py loaddata groups.yaml && \
+	python .\manage.py loaddata access_code.yaml
 

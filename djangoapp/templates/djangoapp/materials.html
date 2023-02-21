@@ -10,7 +10,7 @@
 <main class="materials">
   <div class="menu">
     <h4 class="menu__title">Материалы</h4>
-    <hr size="3rem" color="E5E5E5">
+    <hr class="menu__hr" size="3rem" color="E5E5E5">
     <div class="menu__list">
       <div class="menu__toggle-page">
         <img class='icon' src="{% static 'djangoapp/icons/toggle.svg' %}" alt="">
@@ -19,7 +19,7 @@
       {% if groups %} {% for group in groups %}
         <a class="menu__list-elem" href="{% url 'groups' %}?group={{group.id}}">{{ group.title }}</a>
       {% endfor %} {% else %}
-        <p>Группы отсутствуют</p>
+        <p class="menu__list-elem menu__list-elem--undefined">Группы отсутствуют</p>
       {% endif %}
     </div>
   </div>
@@ -50,7 +50,7 @@
           </div>
         {% endfor %} 
       {% else %}
-        <p>Методические материалы отсутствуют</p>
+        <p class="methodic__list-item methodic__list-item--undefined">Методические материалы отсутствуют</p>
       {% endif %}
     </div>
   </div>
@@ -59,7 +59,7 @@
     <div>
       {% if auth_user %}
       <p class="user-info__role">{{ auth_user.role.alias }}</p>
-      <p class="user-info__name">{{ auth_user.name }} {{ auth_user.surname }}</p>
+      <p class="user-info__name">{{ auth_user.surname }} {{ user_name }}{{ user_patronymic }}</p>
       {% else %}
         <p>Информация отсутствует</p>
       {% endif %}

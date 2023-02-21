@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'users.middleware.AuthMiddleware.AuthMiddleware',
+    'users.middleware.AccessMiddleware.AccessMiddleware',
 ]
 
 ROOT_URLCONF = 'mysqll.urls'

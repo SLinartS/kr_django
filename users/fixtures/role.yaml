@@ -8,3 +8,8 @@
   fields:
       title: student
       alias: Студент
+- model: users.role
+  pk: 3
+  fields:
+      title: admin
+      alias: admin

@@ -10,7 +10,7 @@
 <main class="works">
   <div class="menu">
     <h4 class="menu__title">Преподаватели</h4>
-    <hr size="3rem" color="E5E5E5">
+    <hr class="menu__hr" size="3rem" color="E5E5E5">
     <div class="menu__list">
       {% if users %} 
       {% for user in users %}
@@ -48,7 +48,7 @@
           </div>
         {% endfor %} 
       {% else %}
-        <p>Методические материалы отсутствуют</p>
+        <p class="methodic__list-item methodic__list-item--undefined">Методические материалы отсутствуют</p>
       {% endif %}
     </div>
   </div>
@@ -62,11 +62,12 @@
     </div>
     <form class="file-zone__button-form" action="{% url 'upload-work' teacher_id %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <label class="button load__label" for="file-input">Выбрать файл</label>
-      <input id="file-input" class="load__input" type="file" multiple="multiple" name="work" required />
+      <label class="button load__label load__button--active" for="file-input">Выбрать файл</label>
+      <input id="file-input" data-is-disabled="{{ download_access }}" class="load__input" type="file" multiple="multiple" name="work" required />
       <button class="button load__button" type="submit" disabled>Загрузить работу</button>
     </form>
   </div>
+  <div id="js-data" style="diplay: hidden">{{ access_teachers }}</div>
 
   <script src="{% static 'djangoapp/js/index.js' %}"></script>
 </main>

@@ -1,0 +1,23 @@
+- model: users.accesscode
+  pk: 1
+  fields:
+      code: 'UYGUGG87576HG'
+      role: 1
+
+- model: users.accesscode
+  pk: 2
+  fields:
+      code: 'igjhg87687GHJG'
+      role: 1
+
+- model: users.accesscode
+  pk: 3
+  fields:
+      code: 'g978IUGIY4uhgi654'
+      role: 2
+
+- model: users.accesscode
+  pk: 4
+  fields:
+      code: 'ihuhkjhY87687'
+      role: 3

@@ -9,6 +9,7 @@ from mysqll.constants import FILETYPE_MATERIAL_ID, FILETYPE_WORK_ID, ROLE_TEACHE
 import mimetypes
 from utils.utils import generate_file_url
 from os import path
+import json
 
 
 class Redirect(View):
@@ -26,8 +27,14 @@ class Materials(View):
             id=FILETYPE_MATERIAL_ID), teacher=User.objects.get(id=auth_user.id))
 
         groups = Group.objects.filter(users__id=auth_user.id)
+
+        user_name = auth_user.name[:1] + '.'
+        user_patronymic = auth_user.patronymic[:1] + '.'
+
         return render(request, self.template_name, context={
             'auth_user': auth_user,
+            'user_name': user_name,
+            'user_patronymic': user_patronymic,
             'groups': groups,
             'files': files,
         })
@@ -40,15 +47,30 @@ class Groups(View):
         group_id = request.GET.get('group')
         auth_user = get_auth_user(request)
         if (group_id):
-            files = File.objects.filter(
+            # Получаем юзеров, которые находятся в той же группе
+            # что и текущий пользователь (преподаватель)
+            users_from_authuser_group = User.objects.filter(
+                group__in=Group.objects.filter(users__id=auth_user.id))
+            # Получаем работы найденных студентов
+            works_of_users = File.objects.filter(
                 type=FileType.objects.get(id=FILETYPE_WORK_ID),
-                author__in=User.objects.filter(group__in=Group.objects.filter(users__id=auth_user.id))).filter(author__in=User.objects.filter(group__id=group_id))
+                author__in=users_from_authuser_group)
+            # Получаем только те файлы, авторы которых принадлежат
+            # выбранной в данной момент группе
+            files = works_of_users.filter(author__in=User.objects.filter(
+                group__id=group_id), teacher=auth_user)
         else:
             files = File.objects.filter(
                 type=FileType.objects.get(id=FILETYPE_WORK_ID))
         groups = Group.objects.filter(users__id=auth_user.id)
+
+        user_name = auth_user.name[:1] + '.'
+        user_patronymic = auth_user.patronymic[:1] + '.'
+
         return render(request, self.template_name, context={
             'auth_user': auth_user,
+            'user_name': user_name,
+            'user_patronymic': user_patronymic,
             'groups': groups,
             'files': files,
         })
@@ -66,12 +88,25 @@ class Works(View):
                 author=User.objects.get(id=teacher_id))
         else:
             files = File.objects.filter(
-                type=FileType.objects.get(id=FILETYPE_WORK_ID))
+                type=FileType.objects.get(id=FILETYPE_MATERIAL_ID))
         users = User.objects.filter(role=Role.objects.get(id=ROLE_TEACHER_ID))
+
+        download_access = User.objects.filter(group__in=Group.objects.filter(users__id=auth_user.id),
+                                              role=Role.objects.get(
+                                                  id=ROLE_TEACHER_ID),
+                                              id=teacher_id
+                                              )
+        # access_teachers_array = []
+        # for teacher in access_teachers:
+        #     access_teachers_array.append({'id': teacher.id})
+        # access_teachers = json.dumps(access_teachers_array)
+
+        # print(access_teachers)
         return render(request, self.template_name, context={
             'auth_user': auth_user,
             'users': users,
             'files': files,
+            'download_access': not download_access,
             'teacher_id': teacher_id
         })
 
@@ -82,7 +117,7 @@ class Delete(View):
     def post(self, request, id):
         try:
             delete_file(id)
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get('HTTP_REFERER')) if request.META.get('HTTP_REFERER') else redirect('/')
         except Exception as e:
             return render(request, ERROR_PAGE_URL, context={'error': e})
 
@@ -92,15 +127,14 @@ class UploadWork(View):
 
     def post(self, request, teacher_id):
         files = request.FILES.getlist('work')
-        print(files);
         for file in files:
-          auth_user = get_auth_user(request)
-          random_url = generate_file_url() + path.splitext(file.name)[-1]
-          load_file(file, random_url)
+            auth_user = get_auth_user(request)
+            random_url = generate_file_url() + path.splitext(file.name)[-1]
+            load_file(file, random_url)
 
-          File.objects.create(title=file.name, url=random_url,
-                              author=auth_user, teacher=User.objects.get(id=teacher_id), type=FileType.objects.get(id=FILETYPE_WORK_ID))
-        return redirect(request.META.get('HTTP_REFERER'))
+            File.objects.create(title=file.name, url=random_url,
+                                author=auth_user, teacher=User.objects.get(id=teacher_id), type=FileType.objects.get(id=FILETYPE_WORK_ID))
+        return redirect(request.META.get('HTTP_REFERER')) if request.META.get('HTTP_REFERER') else redirect('/')
 
 
 class UploadMaterial(View):
@@ -113,7 +147,7 @@ class UploadMaterial(View):
             title = title.strip()
         if (not title):
             title = file.name.strip()
-        
+
         auth_user = get_auth_user(request)
         random_url = generate_file_url() + path.splitext(file.name)[-1]
 
@@ -121,7 +155,7 @@ class UploadMaterial(View):
 
         File.objects.create(title=title, url=random_url,
                             author=auth_user, teacher=auth_user, type=FileType.objects.get(id=FILETYPE_MATERIAL_ID))
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if request.META.get('HTTP_REFERER') else redirect('/')
 
 
 class Download(View):
